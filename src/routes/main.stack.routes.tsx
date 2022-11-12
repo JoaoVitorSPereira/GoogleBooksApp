@@ -9,7 +9,13 @@ const { Navigator, Screen } = createStackNavigator();
 export default function MainStackRoutes() {
   return (
     <Navigator>
-      <Screen name="Home" component={HomeScreen} />
+      <Screen
+        options={{
+          headerShown: false,
+        }}
+        name="Home"
+        component={HomeScreen}
+      />
       <Screen name="Details" component={DetailsScreen} />
     </Navigator>
   );
