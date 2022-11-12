@@ -8,7 +8,11 @@ const { Navigator, Screen } = createStackNavigator();
 
 export default function AuthStackRoute() {
   return (
-    <Navigator>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Screen name="Welcome" component={WelcomeScreen} />
     </Navigator>
   );
