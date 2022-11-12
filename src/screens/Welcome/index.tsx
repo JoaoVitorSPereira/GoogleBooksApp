@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { View } from 'react-native';
 
@@ -17,9 +17,22 @@ import {
 
 import { useTheme } from 'styled-components';
 import MainButton from '../../components/MainButton';
+import { useAuth } from '../../hooks/auth';
 
 export default function WelcomeScreen() {
   const theme = useTheme();
+  const { signIn } = useAuth();
+
+  const [name, setName] = useState('');
+
+  async function onSubmit(value: string) {
+    try {
+      await signIn(value);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Container>
       <HeaderWrapper>
@@ -27,16 +40,16 @@ export default function WelcomeScreen() {
         <BookLogo style={{ marginLeft: theme.responsive.value(10) }} />
       </HeaderWrapper>
 
-      <Title>Welcome!!</Title>
+      <Title>Welcome!</Title>
 
       <SubTitleInputWrapper>
         <SubTitle>Write your name to access!</SubTitle>
-        <NameInput />
+        <NameInput value={name} onChangeText={value => setName(value)} />
       </SubTitleInputWrapper>
 
       <ButtonWrapper>
         <View />
-        <MainButton title="Login" />
+        <MainButton title="Login" onPress={() => onSubmit(name)} />
       </ButtonWrapper>
     </Container>
   );

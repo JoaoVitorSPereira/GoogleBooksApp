@@ -60,6 +60,6 @@ export const ButtonWrapper = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  position: absolute;
-  bottom: ${({ theme }) => theme.responsive.value(50)}px;
+
+  margin-top: ${({ theme }) => theme.responsive.value(50)}px;
 `;
