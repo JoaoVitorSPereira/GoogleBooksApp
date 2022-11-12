@@ -53,7 +53,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         console.log(error);
       }
     })();
-  }, [userData]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ signIn, userData }}>

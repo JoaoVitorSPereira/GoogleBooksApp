@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components/native';
 
+import { FlatList } from 'react-native';
+import { BooksDTO } from '../../@types/BooksDTO';
+
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.primary};
@@ -46,4 +49,53 @@ export const Separator = styled.View`
     ${({ theme }) => css`
       background-color: ${theme.colors.text};
     `};
+`;
+
+export const BooksList = styled(
+  FlatList as new () => FlatList<BooksDTO[]>,
+).attrs({
+  showsVerticalScrollIndicator: false,
+})``;
+
+export const ItemContainer = styled.TouchableOpacity`
+  align-items: center;
+  width: ${({ theme }) => theme.responsive.value(250)}px;
+  margin-bottom: ${({ theme }) => theme.responsive.value(20)}px;
+`;
+
+export const BookTitle = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.colors.text};
+    font-size: ${theme.responsive.value(17)}px;
+    font-family: ${theme.fonts.regular};
+    text-align: center;
+  `}
+`;
+
+export const AuthorName = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.colors.text};
+    font-size: ${theme.responsive.value(14)}px;
+    margin-top: ${theme.responsive.value(4)}px;
+    font-family: ${theme.fonts.thin};
+  `}
+`;
+
+export const PhotoContainer = styled.View`
+  ${({ theme }) => css`
+    width: ${theme.responsive.value(150)}px;
+    height: ${theme.responsive.value(180)}px;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-color: white;
+    margin-top: ${theme.responsive.value(10)}px;
+  `}
+`;
+
+export const BookCover = styled.Image`
+  ${({ theme }) => css`
+    width: ${theme.responsive.value(150)}px;
+    height: ${theme.responsive.value(180)}px;
+  `}
 `;
