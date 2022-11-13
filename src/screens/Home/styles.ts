@@ -55,7 +55,12 @@ export const BooksList = styled(
   FlatList as new () => FlatList<BooksDTO[]>,
 ).attrs({
   showsVerticalScrollIndicator: false,
-})``;
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+})`
+  width: 100%;
+`;
 
 export const ItemContainer = styled.TouchableOpacity`
   align-items: center;

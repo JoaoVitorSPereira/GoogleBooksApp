@@ -1,11 +1,13 @@
 export interface BooksDTO {
-  items: {
+  item: {
     volumeInfo: {
       title: string;
       authors: string[];
       publisher: string;
       publishedDate: string;
       description: string;
+      language: string;
+      subtitle: string;
       imageLinks: {
         thumbnail: string;
       };
@@ -16,5 +18,5 @@ export interface BooksDTO {
         };
       };
     };
-  }[];
+  };
 }

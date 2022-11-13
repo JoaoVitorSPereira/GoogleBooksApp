@@ -16,6 +16,7 @@ interface BookContextData {
 
   getBooks: () => Promise<void>;
 
+  pageIndex: number;
   searchBook: string;
 
   setPageIndex: Dispatch<SetStateAction<number>>;
@@ -35,18 +36,18 @@ function BooksProvider({ children }: BooksProviderProps) {
 
   const [pageIndex, setPageIndex] = useState(0);
 
-  const [searchBook, setSearchBook] = useState('');
+  const [searchBook, setSearchBook] = useState('Harry Potter');
 
   async function getBooks() {
     try {
       const response = await api.get(
-        `volumes?q=${searchBook}?printType=books?&key=${apiKey}`,
+        `volumes?q=${searchBook}&startIndex=${pageIndex}&maxResults=10&key=${apiKey}`,
       );
       if (response.status === 200) {
-        if (pageIndex > 0) {
-          setBooksData(booksData.concat(response.data.items));
-        } else {
+        if (pageIndex === 0) {
           setBooksData(response.data.items);
+        } else {
+          setBooksData(booksData.concat(response.data.items));
         }
       }
     } catch (error) {
@@ -71,7 +72,14 @@ function BooksProvider({ children }: BooksProviderProps) {
 
   return (
     <BookContext.Provider
-      value={{ ...values, booksData, setPageIndex, setSearchBook, searchBook }}
+      value={{
+        ...values,
+        booksData,
+        setPageIndex,
+        pageIndex,
+        setSearchBook,
+        searchBook,
+      }}
     >
       {children}
     </BookContext.Provider>

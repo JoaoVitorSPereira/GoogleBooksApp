@@ -17,7 +17,7 @@ export function AppTabRoutes() {
         name="MainRoutes"
         component={MainStackRoutes}
         options={{
-          header: () => <LogoHeader />,
+          headerShown: false,
         }}
       />
       <Screen name="Favourites" component={FavouritesScreen} />

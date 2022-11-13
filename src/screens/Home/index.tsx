@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 
 import { Text } from 'react-native';
@@ -24,8 +25,10 @@ import {
 } from './styles';
 
 export default function HomeScreen() {
-  const { getBooks, booksData, setSearchBook, searchBook } = useBooks();
+  const { getBooks, booksData, setSearchBook, searchBook, setPageIndex } =
+    useBooks();
   const { userData } = useAuth();
+  const navigation = useNavigation();
 
   useEffect(() => {
     (() => {
@@ -36,7 +39,7 @@ export default function HomeScreen() {
     <Container>
       <TopSection>
         <UserGreetings>Hi, {userData.name}</UserGreetings>
-        <SubTitle>Which book suits for your mood today?</SubTitle>
+        <SubTitle>Which book suits your mood today?</SubTitle>
         <SearchInput
           value={searchBook}
           onChangeText={value => setSearchBook(value)}
@@ -46,9 +49,17 @@ export default function HomeScreen() {
       <Separator />
       <BooksList<BooksDTO>
         data={booksData}
+        onEndReached={() => {
+          if (booksData.length >= 10) {
+            setPageIndex(prevState => prevState + 1);
+          }
+        }}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => {
           return (
-            <ItemContainer>
+            <ItemContainer
+              onPress={() => navigation.navigate('Details', { item })}
+            >
               <BookTitle style={{ color: 'white' }}>
                 {item?.volumeInfo.title}
               </BookTitle>
