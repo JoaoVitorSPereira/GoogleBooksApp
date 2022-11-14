@@ -16,7 +16,9 @@ import {
 } from './styles';
 
 import { useTheme } from 'styled-components';
+
 import MainButton from '../../components/MainButton';
+
 import { useAuth } from '../../hooks/auth';
 
 export default function WelcomeScreen() {

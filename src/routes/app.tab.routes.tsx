@@ -3,14 +3,20 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import MainStackRoutes from './main.stack.routes';
+`
+`;
 import FavouritesScreen from '../screens/Favourites';
+
 import { useTheme } from 'styled-components';
+
 import { Text, View } from 'react-native';
 
 import HomeIcon from '../assets/images/home.svg';
 import HomeFilledIcon from '../assets/images/homeFilled.svg';
 import HeartIcon from '../assets/images/heart.svg';
+
 import { RFValue } from 'react-native-responsive-fontsize';
+
 import { useBooks } from '../hooks/books';
 
 const { Navigator, Screen } = createBottomTabNavigator();

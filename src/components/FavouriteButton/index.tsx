@@ -3,7 +3,9 @@ import React from 'react';
 import HeartIcon from '../../assets/images/heart.svg';
 
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
+
 import { useTheme } from 'styled-components';
+
 import { RFValue } from 'react-native-responsive-fontsize';
 
 interface Props extends TouchableOpacityProps {

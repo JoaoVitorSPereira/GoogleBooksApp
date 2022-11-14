@@ -1,6 +1,9 @@
-import { useRoute } from '@react-navigation/native';
-import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+
+import { useRoute } from '@react-navigation/native';
+
+import { format } from 'date-fns';
+
 import { BooksDTO } from '../../@types/BooksDTO';
 
 import {
@@ -31,6 +34,7 @@ export default function DetailsScreen() {
       }
     })();
   }, []);
+
   return (
     <Container>
       {loading ? (

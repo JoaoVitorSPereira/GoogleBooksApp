@@ -5,8 +5,11 @@ import BookLogo from '../../assets/images/book.svg';
 import ArrowIcon from '../../assets/images/arrow.svg';
 
 import { Container, LogoContainer } from './styles';
+
 import { RFValue } from 'react-native-responsive-fontsize';
+
 import { View } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
 
 interface Props {

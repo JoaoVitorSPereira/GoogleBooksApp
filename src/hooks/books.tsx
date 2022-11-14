@@ -7,11 +7,15 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
+
 import { BooksDTO } from '../@types/BooksDTO';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { GOOGLE_API_KEY } from '@env';
 
 import api from '../services/api';
+
 import { useAuth } from './auth';
 
 interface BookContextData {
@@ -40,7 +44,7 @@ const BookContext = createContext<BookContextData>({} as BookContextData);
 
 function BooksProvider({ children }: BooksProviderProps) {
   const { userData } = useAuth();
-  const apiKey = 'AIzaSyAM_1afgDLot5FVDrJnMBTdZorkrLYOMdo';
+
   const userKey = `@googleBooks:data_user:${userData.name}`;
 
   const [loading, setLoading] = useState(false);
