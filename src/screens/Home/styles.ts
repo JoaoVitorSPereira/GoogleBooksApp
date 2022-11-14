@@ -1,13 +1,20 @@
 import styled, { css } from 'styled-components/native';
 
-import { FlatList } from 'react-native';
+import { FlatList, ActivityIndicator } from 'react-native';
 import { BooksDTO } from '../../@types/BooksDTO';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.primary};
   align-items: center;
 `;
+
+export const LoadingActivity = styled(ActivityIndicator).attrs({
+  tintColor: 'white',
+  size: RFValue(40),
+  color: 'white',
+})``;
 
 export const TopSection = styled.View`
   width: 100%;
@@ -96,6 +103,12 @@ export const PhotoContainer = styled.View`
     border-color: white;
     margin-top: ${theme.responsive.value(10)}px;
   `}
+`;
+
+export const IconContainer = styled.View`
+  position: absolute;
+  right: -20px;
+  top: -20px;
 `;
 
 export const BookCover = styled.Image`

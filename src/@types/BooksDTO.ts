@@ -1,4 +1,5 @@
 export interface BooksDTO {
+  id: string;
   item: {
     volumeInfo: {
       title: string;
@@ -7,6 +8,7 @@ export interface BooksDTO {
       publishedDate: string;
       description: string;
       language: string;
+      pageCount: number;
       subtitle: string;
       imageLinks: {
         thumbnail: string;

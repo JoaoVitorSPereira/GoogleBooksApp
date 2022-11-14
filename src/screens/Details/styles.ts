@@ -1,4 +1,5 @@
-import { ScrollView } from 'react-native';
+import { ActivityIndicator, ScrollView } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled, { css } from 'styled-components/native';
 
 export const Container = styled(ScrollView).attrs({
@@ -13,6 +14,12 @@ export const Container = styled(ScrollView).attrs({
       background-color: ${theme.colors.primary};
     `}
 `;
+
+export const LoadingActivity = styled(ActivityIndicator).attrs({
+  tintColor: 'white',
+  size: RFValue(40),
+  color: 'white',
+})``;
 
 export const Title = styled.Text`
   ${({ theme }) => css`

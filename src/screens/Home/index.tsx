@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Text } from 'react-native';
 import { BooksDTO } from '../../@types/BooksDTO';
+import FavouriteButton from '../../components/FavouriteButton';
 
 import SearchInput from '../../components/SearchInput';
 import { useAuth } from '../../hooks/auth';
@@ -11,6 +12,7 @@ import { useBooks } from '../../hooks/books';
 
 import {
   Container,
+  LoadingActivity,
   TopSection,
   UserGreetings,
   SubTitle,
@@ -22,17 +24,28 @@ import {
   AuthorName,
   PhotoContainer,
   BookCover,
+  IconContainer,
 } from './styles';
 
 export default function HomeScreen() {
-  const { getBooks, booksData, setSearchBook, searchBook, setPageIndex } =
-    useBooks();
+  const {
+    loading,
+    getBooks,
+    booksData,
+    setSearchBook,
+    searchBook,
+    setPageIndex,
+    favourites,
+    addFavourite,
+    removeFavorite,
+    searchBooks,
+  } = useBooks();
   const { userData } = useAuth();
   const navigation = useNavigation();
 
   useEffect(() => {
     (() => {
-      getBooks();
+      searchBooks();
     })();
   }, []);
   return (
@@ -47,6 +60,7 @@ export default function HomeScreen() {
         <Title>Books</Title>
       </TopSection>
       <Separator />
+
       <BooksList<BooksDTO>
         data={booksData}
         onEndReached={() => {
@@ -55,20 +69,35 @@ export default function HomeScreen() {
           }
         }}
         keyExtractor={item => String(item.id)}
+        onEndReachedThreshold={0.5}
         renderItem={({ item }) => {
           return (
             <ItemContainer
               onPress={() => navigation.navigate('Details', { item })}
             >
-              <BookTitle style={{ color: 'white' }}>
-                {item?.volumeInfo.title}
-              </BookTitle>
+              {item?.volumeInfo?.title ? (
+                <BookTitle style={{ color: 'white' }}>
+                  {item?.volumeInfo.title}
+                </BookTitle>
+              ) : null}
               {item?.volumeInfo?.authors ? (
                 <AuthorName>{item?.volumeInfo?.authors[0]}</AuthorName>
               ) : null}
 
               <PhotoContainer>
-                {item?.volumeInfo.imageLinks ? (
+                <IconContainer>
+                  <FavouriteButton
+                    selected={favourites.includes(item)}
+                    onPress={() => {
+                      if (favourites.includes(item)) {
+                        removeFavorite(favourites, item);
+                      } else {
+                        addFavourite(favourites, item);
+                      }
+                    }}
+                  />
+                </IconContainer>
+                {item?.volumeInfo?.imageLinks ? (
                   <BookCover
                     source={{ uri: item?.volumeInfo.imageLinks.thumbnail }}
                   />
@@ -80,6 +109,7 @@ export default function HomeScreen() {
           );
         }}
       />
+      {loading && <LoadingActivity />}
     </Container>
   );
 }
