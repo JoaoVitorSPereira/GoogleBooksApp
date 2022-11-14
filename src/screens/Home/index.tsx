@@ -91,7 +91,7 @@ export default function HomeScreen() {
                   <FavouriteButton
                     selected={favourites.find(itens => itens.id === item.id)}
                     onPress={() => {
-                      if (favourites.includes(item)) {
+                      if (favourites.find(itens => itens.id === item.id)) {
                         removeFavorite(favourites, item);
                       } else {
                         addFavourite(favourites, item);

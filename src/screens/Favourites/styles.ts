@@ -37,6 +37,8 @@ export const Card = styled.Pressable`
   flex-direction: row;
   padding: 15px;
   align-items: center;
+  border-bottom-width: 1px;
+  border-color: white;
 `;
 
 export const BookTitle = styled.Text`

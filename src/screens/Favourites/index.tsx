@@ -53,13 +53,9 @@ export default function FavouritesScreen() {
               </BookTitle>
             </TextContainer>
             <FavouriteButton
-              selected={favourites.includes(item)}
+              selected
               onPress={() => {
-                if (favourites.includes(item)) {
-                  removeFavorite(favourites, item);
-                } else {
-                  addFavourite(item);
-                }
+                removeFavorite(favourites, item);
               }}
               style={{ marginLeft: RFValue(15) }}
             />
