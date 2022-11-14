@@ -89,7 +89,7 @@ export default function HomeScreen() {
               <PhotoContainer>
                 <IconContainer>
                   <FavouriteButton
-                    selected={favourites.includes(item)}
+                    selected={favourites.find(itens => itens.id === item.id)}
                     onPress={() => {
                       if (favourites.includes(item)) {
                         removeFavorite(favourites, item);

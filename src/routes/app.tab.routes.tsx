@@ -92,7 +92,7 @@ export function AppTabRoutes() {
                   <Text
                     style={{
                       fontFamily: theme.fonts.bold,
-                      color: theme.colors.primary,
+                      color: theme.colors.text,
                       fontSize: theme.responsive.value(13),
                     }}
                   >
