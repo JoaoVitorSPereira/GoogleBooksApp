@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Text } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 
 import { BooksDTO } from '../../@types/BooksDTO';
 
@@ -42,6 +42,7 @@ export default function HomeScreen() {
     removeFavorite,
     searchBooks,
   } = useBooks();
+  const theme = useTheme();
   const { userData } = useAuth();
   const navigation = useNavigation();
 
@@ -58,6 +59,9 @@ export default function HomeScreen() {
         <SearchInput
           value={searchBook}
           onChangeText={value => setSearchBook(value)}
+          placeholder="Search for a book or writer"
+          placeholderTextColor={theme.colors.text}
+          autoCorrect={false}
         />
         <Title>Books</Title>
       </TopSection>

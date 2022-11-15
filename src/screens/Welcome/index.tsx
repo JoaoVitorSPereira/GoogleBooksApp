@@ -46,7 +46,11 @@ export default function WelcomeScreen() {
 
       <SubTitleInputWrapper>
         <SubTitle>Write your name to access!</SubTitle>
-        <NameInput value={name} onChangeText={value => setName(value)} />
+        <NameInput
+          testID="input-name"
+          value={name}
+          onChangeText={value => setName(value)}
+        />
       </SubTitleInputWrapper>
 
       <ButtonWrapper>
