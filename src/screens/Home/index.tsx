@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Text } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 
 import { BooksDTO } from '../../@types/BooksDTO';
 
@@ -44,6 +44,7 @@ export default function HomeScreen() {
   } = useBooks();
   const { userData } = useAuth();
   const navigation = useNavigation();
+  const theme = useTheme();
 
   useEffect(() => {
     (() => {
@@ -58,6 +59,8 @@ export default function HomeScreen() {
         <SearchInput
           value={searchBook}
           onChangeText={value => setSearchBook(value)}
+          placeholder="Search for a book or an author"
+          placeholderTextColor={theme.colors.text}
         />
         <Title>Books</Title>
       </TopSection>

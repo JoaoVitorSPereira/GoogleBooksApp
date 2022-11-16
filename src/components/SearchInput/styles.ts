@@ -15,10 +15,7 @@ export const Container = styled.View`
   width: 100%;
 `;
 
-export const Input = styled(TextInput).attrs({
-  placeholder: 'Search for a book',
-  placeholderTextColor: 'white',
-})`
+export const Input = styled(TextInput)`
   ${({ theme }) => css`
     color: ${theme.colors.text};
     font-family: ${theme.fonts.regular};
