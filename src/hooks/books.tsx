@@ -14,9 +14,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { GOOGLE_API_KEY } from '@env';
 
-import api from '../services/api';
+import api from '../services';
 
 import { useAuth } from './auth';
+import { RequestGetBooks, RequestGetSearchBooks } from '../services/Books';
 
 interface BookContextData {
   booksData: BooksDTO[];
@@ -53,18 +54,16 @@ function BooksProvider({ children }: BooksProviderProps) {
 
   const [pageIndex, setPageIndex] = useState(0);
 
-  const [searchBook, setSearchBook] = useState('Twillight');
+  const [searchBook, setSearchBook] = useState('Twilight');
 
   const [favourites, setFavourites] = useState<BooksDTO[]>([]);
 
   async function getBooks() {
     try {
       setLoading(true);
-      const response = await api.get(
-        `volumes?q=${searchBook}&startIndex=${pageIndex}&maxResults=10&key=${GOOGLE_API_KEY}`,
-      );
-      if (response.status === 200) {
-        setBooksData(response.data.items);
+      const response = await RequestGetBooks(searchBook, pageIndex);
+      if (response) {
+        setBooksData(booksData.concat(response));
       }
     } catch (error) {
       console.log(error);
@@ -76,11 +75,9 @@ function BooksProvider({ children }: BooksProviderProps) {
   async function searchBooks() {
     try {
       setLoading(true);
-      const response = await api.get(
-        `volumes?q=${searchBook}&maxResults=10&key=${GOOGLE_API_KEY}`,
-      );
-      if (response.status === 200) {
-        setBooksData(response.data.items);
+      const response = await RequestGetSearchBooks(searchBook);
+      if (response) {
+        setBooksData(response);
       }
     } catch (error) {
       console.log(error);

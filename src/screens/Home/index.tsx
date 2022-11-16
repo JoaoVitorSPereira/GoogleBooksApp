@@ -51,6 +51,7 @@ export default function HomeScreen() {
       searchBooks();
     })();
   }, []);
+
   return (
     <Container>
       <TopSection>
@@ -66,14 +67,14 @@ export default function HomeScreen() {
       </TopSection>
       <Separator />
 
-      <BooksList<BooksDTO>
+      <BooksList<BooksDTO[]>
         data={booksData}
         onEndReached={() => {
           if (booksData.length >= 10) {
             setPageIndex(prevState => prevState + 1);
           }
         }}
-        keyExtractor={item => String(item.id)}
+        keyExtractor={() => String(Math.random())}
         onEndReachedThreshold={0.5}
         renderItem={({ item }) => {
           return (

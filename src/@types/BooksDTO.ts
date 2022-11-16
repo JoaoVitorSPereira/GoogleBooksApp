@@ -1,6 +1,6 @@
 export interface BooksDTO {
   id: string;
-  item: {
+  items: {
     volumeInfo: {
       title: string;
       authors: string[];
