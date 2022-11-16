@@ -19,7 +19,7 @@ interface Props {
 export default function LogoHeader({ showBackButton = false }: Props) {
   const navigation = useNavigation();
   return (
-    <Container>
+    <Container testID="header-logo">
       {showBackButton ? (
         <ArrowIcon onPress={() => navigation.goBack()} width={RFValue(30)} />
       ) : (

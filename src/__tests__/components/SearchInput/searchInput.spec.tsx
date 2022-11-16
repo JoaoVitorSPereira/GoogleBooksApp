@@ -19,6 +19,6 @@ describe('Component: Search Input', () => {
 
     const inputComponent = getByPlaceholderText('Search for a book or writer');
 
-    expect(typeof inputComponent).toBeTruthy();
+    expect(typeof inputComponent).toMatch('Search for a book or writer');
   });
 });
