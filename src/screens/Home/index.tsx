@@ -27,6 +27,7 @@ import {
   PhotoContainer,
   BookCover,
   IconContainer,
+  RefresherControl,
 } from './styles';
 
 export default function HomeScreen() {
@@ -69,6 +70,12 @@ export default function HomeScreen() {
 
       <BooksList<BooksDTO[]>
         data={booksData}
+        refreshControl={
+          <RefresherControl
+            refreshing={loading}
+            onRefresh={() => searchBooks()}
+          />
+        }
         onEndReached={() => {
           if (booksData.length >= 10) {
             setPageIndex(prevState => prevState + 1);
@@ -76,18 +83,18 @@ export default function HomeScreen() {
         }}
         keyExtractor={() => String(Math.random())}
         onEndReachedThreshold={0.5}
-        renderItem={({ item }) => {
+        renderItem={({ item }: BooksDTO) => {
           return (
             <ItemContainer
               onPress={() => navigation.navigate('Details', { item })}
             >
-              {item?.volumeInfo?.title ? (
+              {item.volumeInfo.title ? (
                 <BookTitle style={{ color: 'white' }}>
-                  {item?.volumeInfo.title}
+                  {item.volumeInfo.title}
                 </BookTitle>
               ) : null}
-              {item?.volumeInfo?.authors ? (
-                <AuthorName>{item?.volumeInfo?.authors[0]}</AuthorName>
+              {item.volumeInfo.authors ? (
+                <AuthorName>{item.volumeInfo.authors[0]}</AuthorName>
               ) : null}
 
               <PhotoContainer>
@@ -103,9 +110,9 @@ export default function HomeScreen() {
                     }}
                   />
                 </IconContainer>
-                {item?.volumeInfo?.imageLinks ? (
+                {item.volumeInfo.imageLinks ? (
                   <BookCover
-                    source={{ uri: item?.volumeInfo.imageLinks.thumbnail }}
+                    source={{ uri: item.volumeInfo.imageLinks.thumbnail }}
                   />
                 ) : (
                   <BookTitle>This book has no cover!</BookTitle>

@@ -21,10 +21,12 @@ import {
   NoPhotoText,
   TextContainer,
 } from './styles';
+import { BooksDTO } from '../../@types/BooksDTO';
 
 export default function FavouritesScreen() {
   const { favourites, removeFavorite, addFavourite } = useBooks();
   const navigation = useNavigation();
+
   return (
     <Container>
       <LogoHeader showBackButton />
@@ -32,30 +34,30 @@ export default function FavouritesScreen() {
       <Title>Favourites</Title>
       <Separator />
       <FavouritesList>
-        {favourites.map(item => (
+        {favourites.map(items => (
           <Card
-            onPress={() => navigation.navigate('Details', { item })}
-            key={item.id}
+            onPress={() => navigation.navigate('Details', { item: items })}
+            key={items.id}
           >
             <PhotoContainer>
-              {item?.volumeInfo?.imageLinks ? (
+              {items?.volumeInfo?.imageLinks ? (
                 <BookCover
-                  source={{ uri: item.volumeInfo?.imageLinks.thumbnail }}
+                  source={{ uri: items.volumeInfo?.imageLinks.thumbnail }}
                 />
               ) : (
                 <NoPhotoText>NO COVER</NoPhotoText>
               )}
             </PhotoContainer>
             <TextContainer>
-              <BookTitle numberOfLines={2}>{item?.volumeInfo.title}</BookTitle>
+              <BookTitle numberOfLines={2}>{items?.volumeInfo.title}</BookTitle>
               <BookTitle numberOfLines={2}>
-                Page count: {item?.volumeInfo.pageCount}
+                Page count: {items?.volumeInfo.pageCount}
               </BookTitle>
             </TextContainer>
             <FavouriteButton
               selected
               onPress={() => {
-                removeFavorite(favourites, item);
+                removeFavorite(favourites, items);
               }}
               style={{ marginLeft: RFValue(15) }}
             />

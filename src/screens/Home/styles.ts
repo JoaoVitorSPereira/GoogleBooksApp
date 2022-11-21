@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
 
-import { FlatList, ActivityIndicator } from 'react-native';
+import { FlatList, ActivityIndicator, RefreshControl } from 'react-native';
 import { BooksDTO } from '../../@types/BooksDTO';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -62,12 +62,17 @@ export const BooksList = styled(
   FlatList as new () => FlatList<BooksDTO[]>,
 ).attrs({
   showsVerticalScrollIndicator: false,
+
   contentContainerStyle: {
     alignItems: 'center',
   },
 })`
   width: 100%;
 `;
+
+export const RefresherControl = styled(RefreshControl).attrs({
+  tintColor: 'black',
+})``;
 
 export const ItemContainer = styled.TouchableOpacity`
   align-items: center;

@@ -24,12 +24,12 @@ export default function DetailsScreen() {
 
   const route = useRoute();
 
-  const params = route.params as BooksDTO;
+  const { item } = route.params as BooksDTO;
 
   useEffect(() => {
     (() => {
       setLoading(true);
-      if (params.item.volumeInfo) {
+      if (item) {
         setLoading(false);
       }
     })();
@@ -41,10 +41,10 @@ export default function DetailsScreen() {
         <LoadingActivity />
       ) : (
         <>
-          <Title>{params.item.volumeInfo.title}</Title>
-          {params.item.volumeInfo.authors ? (
+          <Title>{item.volumeInfo.title}</Title>
+          {item.volumeInfo.authors ? (
             <AuthorNameContainer>
-              {params.item.volumeInfo.authors.map((item, index) => (
+              {item.volumeInfo.authors.map((item, index) => (
                 <AuthorName key={index}>{item}</AuthorName>
               ))}
             </AuthorNameContainer>
@@ -52,9 +52,9 @@ export default function DetailsScreen() {
           <Separator />
 
           <PhotoContainer>
-            {params.item.volumeInfo.imageLinks ? (
+            {item.volumeInfo.imageLinks ? (
               <PhotoCover
-                source={{ uri: params.item.volumeInfo.imageLinks.thumbnail }}
+                source={{ uri: item.volumeInfo.imageLinks.thumbnail }}
               />
             ) : (
               <Title>NO COVER</Title>
@@ -62,29 +62,24 @@ export default function DetailsScreen() {
           </PhotoContainer>
 
           <BottomPart>
-            {params.item.volumeInfo.subtitle ? (
-              <Description>{params.item.volumeInfo.subtitle}</Description>
+            {item.volumeInfo.subtitle ? (
+              <Description>{item.volumeInfo.subtitle}</Description>
             ) : null}
-            {params.item.volumeInfo.description ? (
-              <Description>{params.item.volumeInfo.description}</Description>
+            {item.volumeInfo.description ? (
+              <Description>{item.volumeInfo.description}</Description>
             ) : null}
-            {params.item.volumeInfo.language ? (
+            {item.volumeInfo.language ? (
               <Description>
-                Language: {params.item.volumeInfo.language.toUpperCase()}
+                Language: {item.volumeInfo.language.toUpperCase()}
               </Description>
             ) : null}
-            {params.item.volumeInfo.pageCount ? (
-              <Description>
-                Pages: {params.item.volumeInfo.pageCount}
-              </Description>
+            {item.volumeInfo.pageCount ? (
+              <Description>Pages: {item.volumeInfo.pageCount}</Description>
             ) : null}
-            {params.item.volumeInfo.publishedDate ? (
+            {item.volumeInfo.publishedDate ? (
               <Description>
                 Published:{' '}
-                {format(
-                  new Date(params.item.volumeInfo.publishedDate),
-                  'dd/MM/yyyy',
-                )}
+                {format(new Date(item.volumeInfo.publishedDate), 'dd/MM/yyyy')}
               </Description>
             ) : null}
           </BottomPart>

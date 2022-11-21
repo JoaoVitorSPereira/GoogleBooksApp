@@ -54,7 +54,7 @@ function BooksProvider({ children }: BooksProviderProps) {
 
   const [pageIndex, setPageIndex] = useState(0);
 
-  const [searchBook, setSearchBook] = useState('Twilight');
+  const [searchBook, setSearchBook] = useState('');
 
   const [favourites, setFavourites] = useState<BooksDTO[]>([]);
 
