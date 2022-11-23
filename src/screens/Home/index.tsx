@@ -52,7 +52,7 @@ export default function HomeScreen() {
       searchBooks();
     })();
   }, []);
-
+  console.log(booksData);
   return (
     <Container>
       <TopSection>
@@ -78,7 +78,7 @@ export default function HomeScreen() {
         }
         onEndReached={() => {
           if (booksData.length >= 10) {
-            setPageIndex(prevState => prevState + 1);
+            setPageIndex(prevState => prevState + 10);
           }
         }}
         keyExtractor={() => String(Math.random())}
@@ -88,12 +88,12 @@ export default function HomeScreen() {
             <ItemContainer
               onPress={() => navigation.navigate('Details', { item })}
             >
-              {item.volumeInfo.title ? (
+              {item.volumeInfo?.title ? (
                 <BookTitle style={{ color: 'white' }}>
                   {item.volumeInfo.title}
                 </BookTitle>
               ) : null}
-              {item.volumeInfo.authors ? (
+              {item.volumeInfo?.authors ? (
                 <AuthorName>{item.volumeInfo.authors[0]}</AuthorName>
               ) : null}
 
@@ -110,7 +110,7 @@ export default function HomeScreen() {
                     }}
                   />
                 </IconContainer>
-                {item.volumeInfo.imageLinks ? (
+                {item.volumeInfo?.imageLinks ? (
                   <BookCover
                     source={{ uri: item.volumeInfo.imageLinks.thumbnail }}
                   />

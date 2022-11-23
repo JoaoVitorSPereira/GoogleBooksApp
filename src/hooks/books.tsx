@@ -63,7 +63,7 @@ function BooksProvider({ children }: BooksProviderProps) {
       setLoading(true);
       const response = await RequestGetBooks(searchBook, pageIndex);
       if (response) {
-        setBooksData(booksData.concat(response));
+        setBooksData(booksData.concat(response.items));
       }
     } catch (error) {
       console.log(error);
