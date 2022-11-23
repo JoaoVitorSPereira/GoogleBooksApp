@@ -52,7 +52,7 @@ export default function HomeScreen() {
       searchBooks();
     })();
   }, []);
-  console.log(booksData);
+
   return (
     <Container>
       <TopSection>
